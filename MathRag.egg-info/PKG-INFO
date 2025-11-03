@@ -1,0 +1,26 @@
+Metadata-Version: 2.4
+Name: MathRag
+Version: 0.1
+Author: Gnana Chaithanya Mangammagari
+Requires-Dist: langchain
+Requires-Dist: langchain_community
+Requires-Dist: langchain_google_genai
+Requires-Dist: langchain_huggingface
+Requires-Dist: langchain_experimental
+Requires-Dist: langchain-qdrant
+Requires-Dist: pypdf
+Requires-Dist: sentence_transformers
+Requires-Dist: langchain-mcp-adapters
+Requires-Dist: mcp
+Requires-Dist: langchain-tavily
+Requires-Dist: crewai
+Requires-Dist: crewai-tools
+Requires-Dist: crewai-tools[mcp]
+Requires-Dist: crewai[google-genai]
+Requires-Dist: streamlit
+Requires-Dist: matplotlib
+Requires-Dist: numpy
+Requires-Dist: Pillow<12,>=7.1.0
+Requires-Dist: pydantic>=2.0.0
+Dynamic: author
+Dynamic: requires-dist
