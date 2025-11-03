@@ -1,7 +1,6 @@
 from qdrant_client import QdrantClient
 from langchain_huggingface.embeddings import HuggingFaceEmbeddings
 from langchain_mcp_adapters.client import MultiServerMCPClient  
-from langchain_google_genai import GoogleGenerativeAI
 from crewai.llm import LLM
 from dotenv import load_dotenv
 import os
@@ -61,7 +60,7 @@ def get_mcp_client()->MultiServerMCPClient:
 
     return mcp_client
 
-def get_llm_model(model_name="gemini-2.5-flash")->GoogleGenerativeAI:
+def get_llm_model(model_name="gemini-2.5-flash")->LLM:
 
     """
     This Function loads and returns the LLM model
