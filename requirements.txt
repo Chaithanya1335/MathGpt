@@ -14,7 +14,7 @@ crewai-tools[mcp]
 crewai[google-genai]
 streamlit==1.51.0
 matplotlib==3.10.7
-numpy=2.3.4
+numpy==2.3.4
 Pillow>=11.3.0
 pydantic>=2.0.0
 
