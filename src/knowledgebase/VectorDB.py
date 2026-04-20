@@ -41,7 +41,7 @@ class VectorDB:
             return
 
         print("Loading and chunking documents...")
-        docs = DataLoader(directory_path="Data").get_documnets()
+        docs = DataLoader(directory_path="Data").get_documents()
         text_splitter = SemanticChunker(
             embeddings=self.embedding_model,
             breakpoint_threshold_type="percentile",

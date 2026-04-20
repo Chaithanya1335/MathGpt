@@ -297,7 +297,7 @@ def extract_and_display_diagrams(response: str):
                                     diagrams.append(diagram_data)
                                     seen_diagrams.add(diagram_id)
                                 modified_response = modified_response.replace(complete_json, "")
-                except:
+                except json.JSONDecodeError:
                     continue
     
     # Also look for diagram markers like [DIAGRAM:type:title:description]
@@ -513,6 +513,10 @@ if st.session_state.agent_initialized:
                             st.session_state.chat_history.append(("assistant", improved_response))
                             st.rerun()
                             
+                        except ValueError as e:
+                            st.error(f"❌ Invalid value error: {str(e)}")
+                        except RuntimeError as e:
+                            st.error(f"❌ Runtime error: {str(e)}")
                         except Exception as e:
                             st.error(f"❌ Error generating improved response: {str(e)}")
                 
@@ -687,6 +691,10 @@ if st.session_state.agent_initialized:
                             st.session_state[new_response_feedback_key] = None  # Reset feedback
                             st.rerun()
                             
+                        except ValueError as e:
+                            st.error(f"❌ Invalid value error: {str(e)}")
+                        except RuntimeError as e:
+                            st.error(f"❌ Runtime error: {str(e)}")
                         except Exception as e:
                             st.error(f"❌ Error generating improved response: {str(e)}")
 

@@ -64,10 +64,10 @@ class GenerateDiagramTool(BaseTool):
                 self._draw_custom_diagram(ax, description, title)
             
             # Convert to base64 (reduced DPI for smaller file size)
-            buf = io.BytesIO()
-            plt.savefig(buf, format='png', dpi=100, bbox_inches='tight', facecolor='white')
-            buf.seek(0)
-            img_base64 = base64.b64encode(buf.read()).decode('utf-8')
+            with io.BytesIO() as buf:
+                plt.savefig(buf, format='png', dpi=100, bbox_inches='tight', facecolor='white')
+                buf.seek(0)
+                img_base64 = base64.b64encode(buf.read()).decode('utf-8')
             plt.close()
             
             return json.dumps({

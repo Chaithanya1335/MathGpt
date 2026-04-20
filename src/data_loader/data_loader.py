@@ -8,7 +8,7 @@ class DataLoader:
         self.directory_path = directory_path
 
     
-    def get_documnets(self)->List[Document]:
+    def get_documents(self)->List[Document]:
         """
         This Function Returns the Documents which is extracted from pdfs
         """

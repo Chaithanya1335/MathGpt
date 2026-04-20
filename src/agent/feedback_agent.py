@@ -80,3 +80,8 @@ class FeedbackAgent:
             return str(results.raw)
         else:
             return str(results)
+    
+    def close(self):
+        """Cleanly shut down the MCP adapter."""
+        if self.mcp_adapter:
+            self.mcp_adapter.__exit__(None, None, None)

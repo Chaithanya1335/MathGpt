@@ -11,6 +11,13 @@ q_key = os.getenv("Qdrant_Api_Key")
 
 Gemini_Api_Key = os.getenv("Gemini_Api_Key")
 
+# Validate API keys before use
+if not q_key or q_key.strip() == "":
+    raise ValueError("Qdrant API key is missing - set QDRANT_API_KEY environment variable")
+
+if not Gemini_Api_Key or Gemini_Api_Key.strip() == "":
+    raise ValueError("Gemini API key is missing - set GEMINI_API_KEY environment variable")
+
 def get_embedding_model(model_name="sentence-transformers/all-MiniLM-L6-v2")->HuggingFaceEmbeddings:
     """
     This function loads and returns the Embedding model
@@ -19,7 +26,7 @@ def get_embedding_model(model_name="sentence-transformers/all-MiniLM-L6-v2")->Hu
     # Loading the model
     embedding_model = HuggingFaceEmbeddings(model=model_name)
 
-    print (f"Embedding Model Loaded ! Diemension is {len(embedding_model.embed_query("hi hello"))}")
+    print (f"Embedding Model Loaded ! Diemension is {len(embedding_model.embed_query('hi hello'))}")
 
     return embedding_model
 
@@ -29,8 +36,11 @@ def get_qdrant_client()->QdrantClient:
     This Function connects with the qdrant clount and returns the client
     """
 
+    # Get Qdrant URL from environment variable with fallback for local development
+    qdrant_url = os.getenv("QDRANT_URL", "http://localhost:6333")
+
     qclient = QdrantClient(
-        url="https://7b6932f4-9a57-42d5-b9d6-d3004ff8c497.europe-west3-0.gcp.cloud.qdrant.io:6333",
+        url=qdrant_url,
         api_key=q_key,
         timeout=120
     )
@@ -44,11 +54,6 @@ def get_mcp_client()->MultiServerMCPClient:
 
     mcp_client = MultiServerMCPClient(
         {
-            "Maths Retriever Tool": {
-                "transport": "stdio",
-                "command": "python",
-                "args": ["Servers/Retriever_Tool.py"]
-            },
             "Web Search Tool": {
                 "transport": "stdio",
                 "command": "python",
